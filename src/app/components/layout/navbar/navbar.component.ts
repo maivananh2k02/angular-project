@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  show = true;
 
   constructor() {
   }
@@ -14,7 +13,5 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  change() {
-    this.show=!this.show;
-  }
+
 }

@@ -1,27 +1,27 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isLogin: boolean = true;
+  isLogin: boolean = false;
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  login() {
-    return this.isLogin = true;
+  login(data: any): Observable<any> {
+    return this.http.post(environment.url_api + 'auth/login', data);
   }
 
   logout() {
     return this.isLogin = false;
   }
 
-  isAuthenticated() {
-    const promise = new Promise<boolean>((resolve, reject) => {
-      setTimeout(() => resolve(this.isLogin), 800);
-    });
-    return promise;
+  getUser() {
+    return localStorage.getItem('userProfile')
   }
 
 }

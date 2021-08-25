@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Dog} from "../../dog";
 import {DogService} from "../../services/dog.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,7 @@ import {DogService} from "../../services/dog.service";
 })
 export class DashboardComponent implements OnInit {
   size = 150;
+  userProfile:any;
   show = false;
   add = false;
   dog: Dog = {
@@ -20,9 +22,11 @@ export class DashboardComponent implements OnInit {
   dogs: Dog[] = [];
   dogFilter: Dog[] = [];
 
-  constructor(private dogService:DogService) {
+  constructor(private dogService:DogService,private authService:AuthService) {
     this.dogs=this.dogService.getAll();
     this.dogFilter = this.dogs;
+    this.userProfile=JSON.parse(<string>this.authService.getUser());
+    console.log(this.userProfile);
   }
 
   ngOnInit(): void {
